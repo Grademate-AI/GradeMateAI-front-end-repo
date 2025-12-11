@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResQ — Volunteer • Impact • Web3 Rewards</title>
+    <link rel="icon" type="image/x-icon" href="image/logo3.png">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="ResQ — a Web3-powered volunteer impact platform. Post needs, verify proof, mint tokens." />
+    
+  <style>
+    body {
+          background: radial-gradient(1200px 600px at 0% 0%, rgba(96,165,250,0.08), transparent),
+                  radial-gradient(900px 500px at 100% 100%, rgba(110,231,183,0.06), transparent),
+                  linear-gradient(180deg,#071025 0%, #07101a);
+        font-family: "Space Grotesk", sans-serif;
+    }
+    .navbar {
+  display: flex;
+  height: 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 100;
+  transition: 0.5s ease-in;
+}
+.nav-links a:hover{
+    color: #4b9bff;
+}
+.wallet-btn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: linear-gradient(90deg,#4b9bff,#6a4bff);
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+.hero {
+    display: grid;
+}
+.gradient-text {
+  background: linear-gradient(45deg,#6EE7B7, #276cc0, #6EE7B7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: 95px;
+  font-size: 70px;
+  filter:   drop-shadow(0 8px 20px rgba(0, 204, 255, 0.705));
+}
+.sub-hero {
+    margin-left: 25px;
+}
+.cta-row{
+    display:flex;
+    gap:12px;
+    align-items: center;
+}
+ .cta{
+    background:linear-gradient(90deg,#60A5FA,#6EE7B7);
+    padding:12px 18px;
+    border-radius:12px;
+    font-weight:700;
+    border:0;
+    color:#042033;
+    cursor:pointer;
+    transition: background 0.33 transform 0.2;
+}
+ .cta:hover {
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.06);
+    transform: translateY(-2px);
+ }
+ .secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 14px;border-radius:12px;color: #9CA3AF;cursor:pointer}
+
+ .problem {
+    max-width:1200px;
+    margin:50px auto;
+    padding:24px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,0.06);
+    backdrop-filter: blur(8px);
+ }
+  </style>
+</head>
+<body>
+<!---NAVIGATION BAR--->
+  <nav class="navbar">
+    <div class="logo"><img src="image/logo4.png" style="width: 120px;"></div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">Why Us</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#demo">Demo</a></li>
+    </ul>
+    <button class="wallet-btn" onclick="connectWallet()">Connect Wallet</button>
+  </nav>
+
+  <!---HERO'S SECTION--->
+  <section id="home" class="hero">
+    <div class="sub-hero">
+    <div class="header">
+    <h1 class="gradient-text" data-aos="fade-up">Help Faster. Earn Trust. <br> Get Rewarded.</h1>
+    <p style="color: white;" data-aos="fade-right">ResQ pairs local needs with volunteers and issues on-chain rewards <br> for verified impact transparent, <br> fast, and human.</p>
+    <div class="cta-row">
+      <button class="cta" onclick="connectWallet()">Get Started <i class="fa-solid fa-arrow-right"></i> </button>
+      <button class="secondary">Join Waitlist</button>
+    </div>
+    </div>
+    <img src="image/heroo.png" data-aos="zoom-in-up" style="margin-top: -335px; margin-left: 750px; filter: drop-shadow(0 8px 20px rgba(0, 204, 255, 0.705));">
+    </div>
+  </section>
+
+  <!---PROBLEM STATEMENT--->
+<section class="problem" data-aos="fade-up"
+     data-aos-duration="3000">
+  <h2 style="font-family:'Space Grotesk', sans-serif;font-size:32px;color:#60A5FA;margin-bottom:12px;">The Problem We Solve</h2>
+  
+  <p style="font-family:'Inter', sans-serif;font-size:18px;color:#e6eef8;line-height:1.5;margin-bottom:16px;">
+    Millions of people in local communities face urgent needs every day—medical emergencies, food shortages, or transport challenges. Traditional aid is often slow, opaque, and unreliable.
+  </p>
+
+  <ul id="problemList" style="font-family:'Inter', sans-serif;color:#9CA3AF;font-size:16px;line-height:1.6;list-style:none;padding-left:0;">
+    <li style="margin-bottom:8px;">⚠ 1 in 3 patients in low-income areas cannot access medicine within 24 hours.</li>
+    <li style="margin-bottom:8px;">⚠ Over 40% of volunteer opportunities go unfulfilled due to lack of coordination and verification.</li>
+    <li style="margin-bottom:8px;">⚠ Traditional aid lacks transparency, leading to low trust and slow response times.</li>
+
+    <!-- Hidden problems -->
+    <li class="extra-problem" style="display:none;margin-bottom:8px;">⚠ Many communities lack real-time visibility of urgent needs.</li>
+    <li class="extra-problem" style="display:none;margin-bottom:8px;">⚠ Volunteers often cannot prove their impact, reducing motivation.</li>
+    <li class="extra-problem" style="display:none;margin-bottom:8px;">⚠ Donations and aid sometimes get lost due to lack of verification and accountability.</li>
+    <li class="extra-problem" style="display:none;margin-bottom:8px;">⚠ Coordinating multiple NGOs and volunteers manually is inefficient and error-prone.</li>
+    <li class="extra-problem reward-problem" style="display:none;margin-bottom:8px;">⚠ Volunteers are often not rewarded fairly or transparently, which reduces engagement and retention.</li>
+  </ul>
+
+  <button id="seeMoreBtn" style="margin-top:16px;background:linear-gradient(90deg,#60A5FA,#6EE7B7);border:none;padding:10px 18px;border-radius:12px;font-weight:600;color:#042033;cursor:pointer;">
+    See More
+  </button>
+
+  <p style="font-family:'Inter', sans-serif;font-size:16px;color:#e6eef8;margin-top:16px;font-weight:600;">
+    ResQ ensures every urgent need is matched with verified volunteers and rewarded transparently on-chain.
+  </p>
+</section>
+
+<script>
+  const seeMoreBtn = document.getElementById('seeMoreBtn');
+  let expanded = false;
+
+  seeMoreBtn.addEventListener('click', () => {
+    const extraProblems = document.querySelectorAll('.extra-problem');
+    expanded = !expanded;
+
+    extraProblems.forEach(p => p.style.display = expanded ? 'list-item' : 'none');
+    seeMoreBtn.textContent = expanded ? 'See Less' : 'See More';
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1500, // animation duration in ms
+    easing: 'ease-out-cubic', // easing function
+    once: true, // whether animation should happen only once
+  });
+
+</script>
+</body>
+</html>
