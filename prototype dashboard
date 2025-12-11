@@ -1,0 +1,349 @@
+<!--
+  ResQ Landing Page - Complete Single File (HTML + CSS + JS)
+  - This file is a full, previewable landing page.
+  - To split into separate files: copy the contents of the <style>...</style> block into styles.css
+    and the contents of the <script>...</script> block into script.js, then update the HTML's
+    <link> and <script src=> references accordingly.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ResQ — Volunteer • Impact • Web3 Rewards</title>
+  <meta name="description" content="ResQ — a Web3-powered volunteer impact platform. Post needs, verify proof, mint tokens." />
+
+  <style>
+    /* ====== Base / Reset ====== */
+    :root{
+      --bg:#0f1724; --card:#0b1220; --accent:#6EE7B7; --accent-2:#60A5FA; --muted:#9CA3AF; --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.03);
+      --glass-border: rgba(255,255,255,0.06);
+      --glass-accent: rgba(110,231,183,0.06);
+      --radius:14px;
+      --ff-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body,#root{height:100%}
+    body{
+      font-family:var(--ff-sans);
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(96,165,250,0.08), transparent),
+                  radial-gradient(900px 500px at 90% 90%, rgba(110,231,183,0.06), transparent),
+                  linear-gradient(180deg,#071025 0%, #07101a 100%);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:28px;
+    }
+
+    /* ====== Nav ====== */
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:1200px;margin:0 auto}
+    .logo{font-weight:700;letter-spacing:0.6px;font-size:20px;display:flex;align-items:center;gap:10px}
+    .logo span{color:var(--accent);font-weight:800}
+    .nav-right{display:flex;align-items:center;gap:12px}
+
+    .wallet-btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));border:0;padding:10px 14px;border-radius:12px;font-weight:600;color:#072033;cursor:pointer;box-shadow:0 6px 18px rgba(96,165,250,0.12);}
+
+    /* ====== Hero ====== */
+    .hero{max-width:1200px;margin:40px auto 24px;display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);padding:36px;border:1px solid var(--glass-border);backdrop-filter: blur(6px);}
+
+    .hero h1{font-size:34px;line-height:1.03;margin-bottom:10px}
+    .hero p{color:var(--muted);margin-bottom:18px}
+    .cta-row{display:flex;gap:12px;align-items:center}
+    .cta{background:linear-gradient(90deg,var(--accent-2),var(--accent));padding:12px 18px;border-radius:12px;font-weight:700;border:0;color:#042033;cursor:pointer;}
+    .secondary{background:transparent;border:1px solid var(--glass-border);padding:10px 14px;border-radius:12px;color:var(--muted);cursor:pointer}
+
+    /* ====== Quick Stats Panel ====== */
+    .stats{display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);}
+    .stat{display:flex;justify-content:space-between;align-items:center}
+    .stat strong{font-size:18px}
+    .muted{color:var(--muted);font-size:13px}
+
+    /* ====== Features ====== */
+    .features{max-width:1200px;margin:28px auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .f-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:14px;border:1px solid var(--glass-border);}
+    .f-card h3{margin-bottom:8px}
+    .f-card p{color:var(--muted);font-size:14px}
+
+    /* ====== Live Demo Panel ====== */
+    .demo{max-width:1200px;margin:24px auto;display:grid;grid-template-columns:660px 1fr;gap:20px}
+    .pane{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:12px;border:1px solid var(--glass-border)}
+    .list{display:flex;flex-direction:column;gap:12px}
+    .need{display:flex;justify-content:space-between;align-items:flex-start;padding:12px;border-radius:10px;background:var(--glass-2);border:1px solid rgba(255,255,255,0.02)}
+    .need h4{margin-bottom:6px}
+    .need p{color:var(--muted);font-size:13px}
+    .badge{padding:6px 8px;border-radius:999px;font-weight:700;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#042033}
+
+    /* ====== Dashboard ====== */
+    .dashboard{display:flex;flex-direction:column;gap:12px}
+    .card{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid var(--glass-border)}
+
+    /* ====== Footer ====== */
+    .footer{max-width:1200px;margin:36px auto;color:var(--muted);font-size:13px;text-align:center;padding:20px}
+
+    /* ====== Small screens ====== */
+    @media (max-width:920px){
+      .hero{grid-template-columns:1fr;}
+      .demo{grid-template-columns:1fr}
+      .features{grid-template-columns:1fr}
+      .nav{padding:8px 0}
+    }
+
+    /* ====== Micro animations ====== */
+    .pulse{animation:pulse 2.6s infinite}
+    @keyframes pulse{0%{transform:translateY(0)}50%{transform:translateY(-4px)}100%{transform:translateY(0)}}
+
+    /* ====== tiny form styles ====== */
+    .form-row{display:flex;gap:8px}
+    input, textarea{background:transparent;border:1px solid var(--glass-border);padding:10px;border-radius:10px;color:inherit;width:100%}
+    textarea{min-height:84px}
+    .small{font-size:13px;color:var(--muted)}
+  </style>
+</head>
+<body>
+
+  <nav class="nav" role="navigation" aria-label="Main Navigation">
+    <div class="logo">ResQ <span>•</span>Impact</div>
+    <div class="nav-right">
+      <div class="small muted">Beta • Testnet</div>
+      <button class="wallet-btn" id="walletBtn">Connect Wallet</button>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-card">
+        <h1>Help Faster. Earn Trust. Get Rewarded.</h1>
+        <p>ResQ pairs local needs with volunteers and issues on-chain rewards for verified impact — transparent, fast, and human.</p>
+
+        <div class="cta-row">
+          <button class="cta" id="joinBtn">Start Helping</button>
+          <button class="secondary" id="howBtn">How it works</button>
+        </div>
+
+        <div style="margin-top:18px;display:flex;gap:12px">
+          <div class="stats" style="flex:1">
+            <div class="stat"><div><strong id="statTasks">12</strong><div class="muted">Active Requests</div></div><div></div></div>
+            <div class="stat"><div><strong id="statVols">9</strong><div class="muted">Volunteers</div></div></div>
+            <div class="stat"><div><strong id="statTokens">420</strong><div class="muted">Tokens Minted</div></div></div>
+          </div>
+
+          <div class="stats" style="width:240px;align-self:center">
+            <div style="font-size:12px;color:var(--muted);margin-bottom:6px">Live Testnet</div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <div style="height:36px;width:36px;border-radius:10px;background:linear-gradient(90deg,var(--accent-2),var(--accent))"></div>
+              <div style="font-size:13px">Polygon Amoy / Solana Devnet (demo)</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <aside class="pane">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <div style="font-weight:700">Volunteer Snapshot</div>
+          <div class="small muted">Wallet: <span id="walletAddr">Not connected</span></div>
+        </div>
+
+        <div class="dashboard">
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div class="small muted">Tokens Earned</div>
+                <div style="font-weight:800;font-size:20px"><span id="tokenCount">0</span> RQ</div>
+              </div>
+              <div>
+                <div class="small muted">Tasks</div>
+                <div style="font-weight:700"> <span id="tasksDone">0</span> </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card small muted">Tip: For demo, click <strong>Simulate Flow</strong> to run the full post→accept→verify→mint sequence.</div>
+
+          <div style="display:flex;gap:8px">
+            <button class="cta" id="simBtn">Simulate Flow</button>
+            <button class="secondary" id="viewChain">View Tx</button>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="features" aria-label="Features">
+      <div class="f-card">
+        <h3>Post a Need</h3>
+        <p>Anyone can post urgent requests—medicine, food, transport—tagged with location & urgency.</p>
+      </div>
+      <div class="f-card">
+        <h3>Volunteer & Verify</h3>
+        <p>Volunteers accept tasks and submit proof (photo + short note). Moderators verify and trigger rewards.</p>
+      </div>
+      <div class="f-card">
+        <h3>Transparent Rewards</h3>
+        <p>Tokens are minted on-chain (testnet) and the tx hash is visible for audit and trust.</p>
+      </div>
+    </section>
+
+    <section class="demo" aria-label="Live demo">
+      <div class="pane">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <div style="font-weight:700">Open Requests</div>
+          <div class="muted small">Demo list — click to accept</div>
+        </div>
+
+        <div class="list" id="needsList">
+          <!-- JS will populate demo needs -->
+        </div>
+
+        <hr style="margin:12px 0;border-color:rgba(255,255,255,0.03)" />
+
+        <div style="margin-top:8px">
+          <div style="font-weight:700;margin-bottom:8px">Post a quick need</div>
+          <div class="form-row" style="margin-bottom:8px">
+            <input id="needTitle" placeholder="Need title e.g. Help buy medicine" />
+            <button class="cta" id="postNeed">Post</button>
+          </div>
+          <textarea id="needDesc" placeholder="Short description (location, urgency)"></textarea>
+        </div>
+      </div>
+
+      <div class="pane">
+        <div style="font-weight:700;margin-bottom:8px">Activity Feed</div>
+        <div id="activity" class="small muted">No activity yet — simulate or post a need.</div>
+
+        <div style="margin-top:12px">
+          <div style="font-weight:700;margin-bottom:8px">Moderator Panel</div>
+          <div class="small muted">Approve proofs to mint test tokens.</div>
+
+          <div style="display:flex;gap:8px;margin-top:10px">
+            <button class="cta" id="approveBtn">Approve Last Proof</button>
+            <button class="secondary" id="rejectBtn">Reject</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">© 2025 ResQ — Built for impact. SDG-aligned.</footer>
+  </main>
+
+  <script>
+    // ======= Demo data & small 'backend' emulation =======
+    const needs = [
+      {id:1,title:'Help buy malaria meds',desc:'Local clinic, urgent',status:'open'},
+      {id:2,title:'Transport to clinic',desc:'Elderly patient, 2km',status:'open'},
+      {id:3,title:'Feed for family',desc:'Food supplies needed',status:'open'}
+    ];
+
+    // Simple state
+    let wallet = null;
+    let tokenCount = 0;
+    let tasksDone = 0;
+    let lastProof = null;
+
+    const needsList = document.getElementById('needsList');
+    const walletBtn = document.getElementById('walletBtn');
+    const walletAddr = document.getElementById('walletAddr');
+    const simBtn = document.getElementById('simBtn');
+    const activity = document.getElementById('activity');
+    const tokenCountEl = document.getElementById('tokenCount');
+    const tasksDoneEl = document.getElementById('tasksDone');
+    const postNeedBtn = document.getElementById('postNeed');
+    const needTitle = document.getElementById('needTitle');
+    const needDesc = document.getElementById('needDesc');
+    const approveBtn = document.getElementById('approveBtn');
+
+    function renderNeeds(){
+      needsList.innerHTML = '';
+      needs.filter(n=>n.status!=='done').forEach(n=>{
+        const el = document.createElement('div'); el.className='need';
+        el.innerHTML = `<div style="max-width:70%"><h4>${escapeHTML(n.title)}</h4><p>${escapeHTML(n.desc)}</p></div>
+                        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+                          <div class="small muted">${n.status}</div>
+                          <button class="cta" onclick="acceptTask(${n.id})">Accept</button>
+                        </div>`;
+        needsList.appendChild(el);
+      })
+    }
+
+    function escapeHTML(s){ return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"})[c]); }
+
+    window.acceptTask = function(id){
+      if(!wallet){ alert('Connect wallet first (demo)'); return; }
+      const task = needs.find(x=>x.id===id);
+      if(!task) return;
+      task.status='in-progress';
+      renderNeeds();
+      activity.innerHTML = `Volunteer <strong>${wallet}</strong> accepted "${escapeHTML(task.title)}"`;
+
+      // Simulate upload of proof after 2s
+      setTimeout(()=>{
+        lastProof = {taskId:task.id,volunteer:wallet,proof:'photo_abc.jpg',note:'Bought meds and delivered'};
+        activity.innerHTML += `<br><span style="color:#9AE6B4">Proof uploaded — awaiting moderation</span>`;
+      },1500);
+    }
+
+    walletBtn.addEventListener('click',()=>{
+      // demo wallet connect (NOT real web3 integration) — replace with MetaMask/Phantom logic later
+      if(!wallet){
+        wallet = '0x' + Math.random().toString(16).slice(2,10);
+        walletAddr.textContent = wallet;
+        walletBtn.textContent = 'Disconnect';
+      } else { wallet = null; walletAddr.textContent='Not connected'; walletBtn.textContent='Connect Wallet'; }
+    })
+
+    simBtn.addEventListener('click',()=>{
+      // Simulate full flow: post -> accept -> proof -> moderator approves -> mint
+      if(!wallet){ alert('Connect wallet first (demo)'); return; }
+      // Post a demo need
+      const demo = {id:Date.now(),title:'Demo: Buy meds',desc:'Urgent demo need',status:'open'};
+      needs.unshift(demo); renderNeeds(); activity.innerHTML = 'Demo need posted.';
+
+      // Accept after 1s
+      setTimeout(()=>{ acceptTask(demo.id); },900);
+
+      // Moderator approves and mints after 4s
+      setTimeout(()=>{ if(lastProof && lastProof.taskId===demo.id){ approveProof(); } else { activity.innerHTML += '<br><span class="muted">No proof found to approve</span>'; } },4200);
+    })
+
+    approveBtn.addEventListener('click',()=>{ approveProof(); });
+
+    function approveProof(){
+      if(!lastProof){ alert('No proof to approve'); return; }
+      // Mark task done
+      const t = needs.find(x=>x.id===lastProof.taskId);
+      if(t) t.status='done';
+      renderNeeds();
+
+      // Mint tokens (demo only) — in real app this triggers backend -> smart contract
+      const minted = Math.floor(Math.random()*40)+10;
+      tokenCount += minted; tasksDone += 1;
+      tokenCountEl.textContent = tokenCount; tasksDoneEl.textContent = tasksDone;
+
+      activity.innerHTML += `<br><span style="color:#9AE6B4">Moderator approved — minted ${minted} RQ to ${lastProof.volunteer}</span>`;
+      activity.innerHTML += `<br>Tx: 0x${Math.random().toString(16).slice(2,12)}`;
+
+      // reset lastProof
+      lastProof = null;
+    }
+
+    postNeedBtn.addEventListener('click',()=>{
+      const t = needTitle.value.trim(); const d = needDesc.value.trim();
+      if(!t){ alert('Add a title'); return; }
+      needs.unshift({id:Date.now(),title:t,desc:d||'No description',status:'open'});
+      needTitle.value=''; needDesc.value=''; renderNeeds();
+      activity.innerHTML = `Need posted: "${escapeHTML(t)}"`;
+    })
+
+    // small helpers
+    document.getElementById('viewChain').addEventListener('click',()=>{
+      alert('Opens block explorer (demo) — replace with actual tx link in production');
+    })
+
+    // initial render
+    renderNeeds();
+
+  </script>
+</body>
+</html>
