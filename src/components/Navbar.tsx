@@ -22,7 +22,7 @@ export const Navbar: FC = () => {
         </div>
 
         {/* Desktop Links */}
-        <nav className="hidden md:flex gap-8 font-medium">
+        <nav className="hidden md:flex items-center gap-6 font-medium">
           {links.map((link) => (
             <a
               key={link}
@@ -32,15 +32,23 @@ export const Navbar: FC = () => {
               {link}
             </a>
           ))}
-        </nav>
 
-        {/* Wallet Button */}
-        <button
-          className="hidden md:inline ml-4 px-6 py-2 rounded-full bg-gradient-to-r from-[#4b9bff] to-[#6EE7B7] text-[#071025] font-semibold hover:scale-105 transition-transform duration-200 shadow-neon"
-          onClick={() => alert("Connect Wallet")}
-        >
-          Connect Wallet
-        </button>
+          {/* Login & Sign Up Buttons */}
+          <div className="flex gap-4 ml-4">
+            <a
+              href="/login"
+              className="px-5 py-2 rounded-full bg-transparent border-2 border-white text-white font-semibold hover:bg-white hover:text-[#071025] transition-all duration-300"
+            >
+              Login
+            </a>
+            <a
+              href="/signup"
+              className="px-5 py-2 rounded-full bg-gradient-to-r from-[#4b9bff] to-[#6EE7B7] text-[#071025] font-semibold hover:scale-105 transition-transform duration-200 shadow-neon"
+            >
+              Sign Up
+            </a>
+          </div>
+        </nav>
 
         {/* Mobile Menu Icon */}
         <div
@@ -64,12 +72,22 @@ export const Navbar: FC = () => {
               {link}
             </a>
           ))}
-          <button
-            className="mt-2 px-6 py-2 rounded-full bg-gradient-to-r from-[#4b9bff] to-[#6EE7B7] text-[#071025] font-semibold hover:scale-105 transition-transform duration-200 shadow-neon"
-            onClick={() => alert("Connect Wallet")}
-          >
-            Connect Wallet
-          </button>
+
+          {/* Mobile Login & Sign Up */}
+          <div className="flex flex-col gap-3 mt-2">
+            <a
+              href="/login"
+              className="px-6 py-2 rounded-full bg-transparent border-2 border-white text-white font-semibold text-center hover:bg-white hover:text-[#071025] transition-all duration-300"
+            >
+              Login
+            </a>
+            <a
+              href="/signup"
+              className="px-6 py-2 rounded-full bg-gradient-to-r from-[#4b9bff] to-[#6EE7B7] text-[#071025] font-semibold text-center hover:scale-105 transition-transform duration-200 shadow-neon"
+            >
+              Sign Up
+            </a>
+          </div>
         </nav>
       )}
     </header>
