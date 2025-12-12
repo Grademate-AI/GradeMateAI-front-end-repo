@@ -1,95 +1,79 @@
-import { type FC, useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
-import Logo from "../assets/images/logo.png"; // Make sure the path is correct
+// Navbar.tsx
+import { useState, useEffect } from "react";
+import { FaBars, FaTimes, FaHome, FaHandsHelping, FaUsers, FaImages, FaPhone } from "react-icons/fa";
+import Logo from "../assets/images/logo.png";
 
-export const Navbar: FC = () => {
+export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const links = ["Home", "NGOs", "Volunteers", "Features"];
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const links = [
+    { name: "Home", icon: <FaHome /> },
+    { name: "NGO", icon: <FaHandsHelping /> },
+    { name: "Volunteers", icon: <FaUsers /> },
+    { name: "Gallery", icon: <FaImages /> },
+    { name: "Contact", icon: <FaPhone /> },
+  ];
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-[#071025]/80 backdrop-blur-md border-b border-[#4b9bff]/20 shadow-lg">
-      <div className="container mx-auto flex justify-between items-center py-4 px-6 md:px-12">
-        {/* Logo */}
-        <div className="flex items-center gap-3">
-          <img
-            src={Logo}
-            alt="ResQ Logo"
-            className="w-12 h-12 rounded-full shadow-neon hover:scale-110 transition-transform duration-300"
-          />
-          <span className="text-2xl md:text-3xl font-bold text-[#6EE7B7] glow-neon">
-            ResQ
-          </span>
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 
+        ${scrolled ? "bg-white/30 backdrop-blur-2xl shadow-xl" : "bg-white/20 backdrop-blur-xl shadow-md"}
+        border-b border-white/20`}
+    >
+      <nav className="flex items-center justify-between px-4 sm:px-6 py-2 max-w-[1200px] mx-auto w-full">
+        {/* LOGO */}
+        <div className="flex items-center gap-2 shrink-0">
+          <img src={Logo} alt="ResQ Logo" className="w-10 h-10 rounded-full shadow-md" />
+          <h1 className="text-xl font-extrabold text-gray-900 tracking-wide">ResQ</h1>
         </div>
 
-        {/* Desktop Links */}
-        <nav className="hidden md:flex items-center gap-6 font-medium">
+        {/* DESKTOP LINKS */}
+        <ul className="hidden md:flex items-center gap-4 md:gap-8 text-gray-900 font-semibold text-base flex-wrap">
           {links.map((link) => (
-            <a
-              key={link}
-              href={`#${link.toLowerCase()}`}
-              className="text-gray-300 hover:from-emerald-400 hover:to-blue-500 hover:bg-clip-text hover:text-transparent bg-gradient-to-r transition-all duration-300 transform hover:scale-105"
-            >
-              {link}
-            </a>
+            <li key={link.name} className="relative group flex items-center gap-1 cursor-pointer shrink-0">
+              {link.icon}
+              <span className="hover:text-green-700 transition-colors">{link.name}</span>
+
+              {/* Animated underline */}
+              <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-gradient-to-r from-green-400 to-yellow-400 rounded-full transition-all duration-300 group-hover:w-full"></span>
+            </li>
           ))}
+        </ul>
 
-          {/* Login & Sign Up Buttons */}
-          <div className="flex gap-4 ml-4">
-            <a
-              href="/login"
-              className="px-5 py-2 rounded-full bg-transparent border-2 border-white text-white font-semibold hover:bg-white hover:text-[#071025] transition-all duration-300"
-            >
-              Login
-            </a>
-            <a
-              href="/signup"
-              className="px-5 py-2 rounded-full bg-gradient-to-r from-[#4b9bff] to-[#6EE7B7] text-[#071025] font-semibold hover:scale-105 transition-transform duration-200 shadow-neon"
-            >
-              Sign Up
-            </a>
-          </div>
-        </nav>
-
-        {/* Mobile Menu Icon */}
-        <div
-          className="md:hidden text-gray-300 text-xl cursor-pointer"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          {menuOpen ? <FaTimes /> : <FaBars />}
+        {/* MOBILE MENU ICON */}
+        <div className="md:hidden">
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="w-10 h-10 flex items-center justify-center rounded-2xl bg-white/40 backdrop-blur-xl shadow-lg hover:bg-white/60 transition-all"
+          >
+            {menuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+          </button>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Menu */}
+      {/* MOBILE DROPDOWN */}
       {menuOpen && (
-        <nav className="md:hidden bg-[#071025]/90 backdrop-blur-md p-6 flex flex-col gap-4 text-gray-300">
-          {links.map((link) => (
-            <a
-              key={link}
-              href={`#${link.toLowerCase()}`}
-              className="px-4 py-2 rounded-full transition-all duration-300 hover:bg-gradient-to-r hover:from-emerald-400 hover:to-blue-500 hover:text-gray-900"
-              onClick={() => setMenuOpen(false)}
-            >
-              {link}
-            </a>
-          ))}
-
-          {/* Mobile Login & Sign Up */}
-          <div className="flex flex-col gap-3 mt-2">
-            <a
-              href="/login"
-              className="px-6 py-2 rounded-full bg-transparent border-2 border-white text-white font-semibold text-center hover:bg-white hover:text-[#071025] transition-all duration-300"
-            >
-              Login
-            </a>
-            <a
-              href="/signup"
-              className="px-6 py-2 rounded-full bg-gradient-to-r from-[#4b9bff] to-[#6EE7B7] text-[#071025] font-semibold text-center hover:scale-105 transition-transform duration-200 shadow-neon"
-            >
-              Sign Up
-            </a>
-          </div>
-        </nav>
+        <div className="md:hidden px-4 sm:px-6 pb-3 w-full">
+          <ul className="flex flex-col gap-3 bg-white/30 backdrop-blur-xl border border-white/40 rounded-2xl p-4 shadow-xl w-full">
+            {links.map((link) => (
+              <li
+                key={link.name}
+                className="flex items-center gap-2 text-gray-900 font-semibold text-base hover:text-green-700 transition-all cursor-pointer"
+              >
+                {link.icon}
+                {link.name}
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </header>
   );
-};
+}

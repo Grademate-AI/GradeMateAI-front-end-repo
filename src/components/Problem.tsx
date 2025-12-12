@@ -1,36 +1,59 @@
-import { useState } from "react";
+// Problem.tsx
+import { type FC } from "react";
 
-const extraProblems = [
-  "Many communities lack real-time visibility of urgent needs.",
-  "Volunteers often cannot prove their impact, reducing motivation.",
-  "Donations and aid sometimes get lost due to lack of verification and accountability.",
-  "Coordinating multiple NGOs and volunteers manually is inefficient and error-prone.",
-  "Volunteers are often not rewarded fairly or transparently, reducing engagement."
+const problems = [
+  {
+    title: "Urgent Local Needs",
+    desc: "Millions of people in communities face urgent challenges daily — medical, food, or transport emergencies.",
+    icon: "⚠️",
+  },
+  {
+    title: "Uncoordinated Volunteers",
+    desc: "Over 40% of volunteer opportunities go unfulfilled due to lack of coordination and verification.",
+    icon: "🤝",
+  },
+  {
+    title: "Opaque Aid",
+    desc: "Traditional aid lacks transparency, leading to low trust and slow response times.",
+    icon: "🔍",
+  },
 ];
 
-export function Problem() {
-  const [expanded, setExpanded] = useState(false);
-
+export const Problem: FC = () => {
   return (
-    <section className="problem-card mx-auto max-w-6xl" data-aos="fade-up">
-      <h2 className="text-3xl font-bold text-blue-400 mb-4">The Problem We Solve</h2>
-      <p className="text-gray-300 mb-4">
-        Millions of people in local communities face urgent needs every day—medical emergencies, food shortages, or transport challenges. Traditional aid is often slow, opaque, and unreliable.
-      </p>
-      <ul className="list-disc list-inside text-gray-400 mb-4">
-        <li>1 in 3 patients in low-income areas cannot access medicine within 24 hours.</li>
-        <li>Over 40% of volunteer opportunities go unfulfilled due to lack of coordination and verification.</li>
-        <li>Traditional aid lacks transparency, leading to low trust and slow response times.</li>
-        {expanded && extraProblems.map((p, i) => (
-          <li key={i}>{p}</li>
-        ))}
-      </ul>
-      <button
-        className="cta"
-        onClick={() => setExpanded(!expanded)}
-      >
-        {expanded ? "See Less" : "See More"}
-      </button>
+    <section className="my-5 text-white overflow-hidden">
+      <div className="container">
+        <h2
+          className="text-center text-3xl md:text-4xl fw-bold mb-5"
+          style={{ color: "#6EE7B7", textShadow: "0 0 10px #6EE7B7" }}
+        >
+          The Problems We Solve
+        </h2>
+        <div className="row g-4">
+          {problems.map((p) => (
+            <div key={p.title} className="col-12 col-md-4">
+              <div
+                className="h-100 p-4 rounded-3 shadow-lg text-center d-flex flex-column align-items-center justify-content-start"
+                style={{
+                  border: "1px solid rgba(75, 155, 255, 0.3)",
+                  background: "rgba(7, 16, 37, 0.6)",
+                  transition: "transform 0.3s",
+                  cursor: "pointer",
+                }}
+              >
+                <div className="mb-3 display-4">{p.icon}</div>
+                <h3
+                  className="fw-semibold mb-2"
+                  style={{ color: "#6EE7B7", textShadow: "0 0 8px #6EE7B7" }}
+                >
+                  {p.title}
+                </h3>
+                <p className="text-light">{p.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
-}
+};

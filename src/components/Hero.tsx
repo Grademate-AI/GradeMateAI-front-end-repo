@@ -1,5 +1,7 @@
+// Hero.tsx
 import { type FC } from "react";
 import { Carousel } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export const Hero: FC = () => {
   const slides = [
@@ -21,40 +23,37 @@ export const Hero: FC = () => {
   ];
 
   return (
-    <section className="hero w-screen relative">
-      <Carousel fade interval={4500} indicators controls={false} className="w-full">
+    <section className="relative mt-28 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#4b9bff]/20 via-[#071025]/40 to-[#6EE7B7]/20 blur-3xl -z-10"></div>
+
+      <Carousel fade interval={4500} controls={false} indicators={false}>
         {slides.map((slide, index) => (
           <Carousel.Item key={index}>
             <div
-              className="relative w-screen h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] flex items-center"
+              className="relative w-full h-[350px] sm:h-[450px] md:h-[550px] lg:h-[650px] flex items-center justify-center"
               style={{
                 backgroundImage: `url(${slide.img})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
               }}
             >
-              {/* Overlay for readability */}
-              <div className="absolute inset-0 bg-black/50 rounded-xl"></div>
+              <div className="absolute inset-0 bg-[#071025]/70 backdrop-blur-sm"></div>
+              <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-[#4b9bff]/25 to-transparent blur-xl"></div>
 
-              {/* Text content */}
-              <div className="relative z-10 max-w-2xl text-white space-y-4 mx-6 sm:mx-12 md:mx-24">
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-snug glow-neon">
+              <div className="relative z-10 max-w-3xl px-6 sm:px-12 md:px-20 space-y-6 text-white text-center md:text-left">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight drop-shadow-xl">
                   {slide.title}
                 </h1>
-                <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
-                  {slide.desc}
-                </p>
+                <p className="text-base sm:text-lg md:text-xl lg:text-2xl opacity-90 leading-relaxed">{slide.desc}</p>
 
-                {/* Buttons */}
-                <div className="flex flex-wrap gap-4 mt-6">
-                  {/* Get Started Button */}
-                  <button className="px-10 py-3 rounded-full bg-gradient-to-r from-emerald-400 to-blue-500 text-gray-900 font-bold text-lg hover:from-emerald-300 hover:to-blue-400 transition-all shadow-lg hover:shadow-2xl hover:scale-105">
+                <div className="flex flex-wrap gap-4 justify-center md:justify-start mt-6">
+                  <Link
+                    to="/signup"
+                    className="px-10 py-3 rounded-full bg-gradient-to-r from-[#4b9bff] to-[#6EE7B7] text-[#071025] font-bold text-lg shadow-xl hover:scale-105 transition-transform duration-300"
+                  >
                     Get Started
-                  </button>
-
-                  {/* Watch Demo Button */}
-                  <button className="px-10 py-3 rounded-full bg-transparent border-2 border-white text-white font-bold text-lg hover:bg-white hover:text-gray-900 transition-all shadow hover:shadow-xl hover:scale-105">
+                  </Link>
+                  <button className="px-10 py-3 rounded-full border border-white/50 bg-white/10 backdrop-blur-sm text-white font-semibold text-lg hover:bg-white hover:text-[#071025] transition-all shadow-md hover:shadow-xl hover:scale-105">
                     Watch Demo
                   </button>
                 </div>
